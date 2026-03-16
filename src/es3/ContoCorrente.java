@@ -15,14 +15,20 @@ public class ContoCorrente {
 
 
     //da modificare
-    public void preleva(double x) {
-        if (nMovimenti < maxMovimenti) {
-            saldo = saldo - x;
-        } else {
-            // Se superi i movimenti massimi, sottrae il prelievo + 0.50€ di commissione
-            saldo = saldo - x - 0.50;
+    public void preleva(double x) throws BancaException {
+
+
+            if (nMovimenti < maxMovimenti) {
+                saldo = saldo - x;
+            } else {
+                // Se superi i movimenti massimi, sottrae il prelievo + 0.50€ di commissione
+                saldo = saldo - x - 0.50;
+            }
+            nMovimenti++;
+        if(saldo < 0){
+            throw new BancaException("il conto è in rosso");
         }
-        nMovimenti++;
+
     }
 
     public double restituisciSaldo() {
